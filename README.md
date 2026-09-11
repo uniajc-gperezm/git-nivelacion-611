@@ -9,4 +9,4 @@ Integrates:
     - Pepito Perez.....
     - Samir Rosero    
     - karen viviana
-    - Sebastian Abadia
+    - Sebastián Abadía
