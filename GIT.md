@@ -1,127 +1,255 @@
-# GIT - La guía fácil para bachilleres 😎
+# Git desde la terminal
 
-## ¿Qué es Git?
+Esta guia resume el flujo basico para trabajar con Git desde la terminal.
 
-Git es como un **control de cambios** para tu código. Imagina que tienes un documento importante en Word, y quieres guardar todas las versiones que escribiste. Git hace exactamente eso, pero para código.
+## 1. Conceptos esenciales
 
-Es como tener un **historial de cambios** donde puedes:
-- Ver qué cambié
-- Cuándo lo cambié
-- Por qué lo cambié
-- Volver atrás si cometí un error
+- **Repositorio:** carpeta controlada por Git.
+- **Working tree:** archivos que estamos editando.
+- **Staging area:** cambios seleccionados para el proximo commit.
+- **Commit:** registro de una version del proyecto.
+- **Repositorio remoto:** copia del proyecto alojada en GitHub u otro servidor.
 
-## ¿Para qué sirve?
+El flujo habitual es:
 
-1. **Historial de cambios**: Puedes ver todos los cambios que has hecho
-2. **Trabajo en equipo**: Varios programadores pueden trabajar en el mismo proyecto sin pisarse
-3. **Recuperación**: Si algo se daña, puedes volver a una versión anterior
-4. **Respaldo**: Tus cambios quedan guardados
-
-## Los comandos básicos que necesitas (sin complicarte)
-
-### 1. Preparar Git por primera vez
+```text
+editar archivos -> git status -> git add -> git commit -> git push
 ```
+
+## 2. Configuracion inicial
+
+Se realiza una sola vez por equipo:
+
+```bash
 git config --global user.name "Tu Nombre"
-git config --global user.email "tu@email.com"
+git config --global user.email "tu-correo@ejemplo.com"
+git config --global init.defaultBranch main
 ```
-*Esto es como registrarse, solo lo haces una vez*
 
-### 2. Crear un proyecto nuevo
+Para comprobar la configuracion:
+
+```bash
+git config --global --list
+git --version
 ```
+
+## 3. Crear u obtener un repositorio
+
+### Crear un repositorio local
+
+Desde la carpeta del proyecto:
+
+```bash
 git init
 ```
-*Le dices a Git que vigile esta carpeta*
 
-### 3. Ver qué has cambiado
+### Clonar un repositorio existente
+
+```bash
+git clone https://github.com/usuario/proyecto.git
+cd proyecto
 ```
+
+## 4. Revisar el estado del proyecto
+
+Antes y despues de trabajar, consulta el estado:
+
+```bash
 git status
 ```
-*Te muestra qué archivos has modificado*
 
-### 4. Guardar un cambio (paso 1 - Preparar)
+Este comando muestra archivos nuevos, modificados, preparados para commit y la rama actual.
+
+Para consultar los cambios que aun no se han preparado:
+
+```bash
+git diff
 ```
+
+## 5. Preparar cambios
+
+Agregar un archivo especifico:
+
+```bash
+git add nombre-del-archivo.txt
+```
+
+Agregar todos los cambios de la carpeta actual:
+
+```bash
 git add .
 ```
-*"Git, prepárate para guardar estos cambios"*
-*El punto (.) significa "todos los archivos"*
 
-### 5. Guardar un cambio (paso 2 - Confirmar)
-```
-git commit -m "Tu mensaje aquí"
-```
-*Ahora sí guardas. El -m es el mensaje que describes qué hiciste*
+Quitar un archivo del staging sin perder sus cambios:
 
-**Ejemplo real:**
-```
-git commit -m "Agregué el formulario de login"
+```bash
+git restore --staged nombre-del-archivo.txt
 ```
 
-### 6. Ver tu historial de cambios
-```
-git log
-```
-*Te muestra todos los cambios que guardaste*
+## 6. Crear un commit
 
-## El flujo normal de trabajo (resumen)
+Un commit debe representar un cambio concreto y tener un mensaje claro:
 
-```
-1. Modificas tus archivos
-         ↓
-2. Escribes: git add .
-         ↓
-3. Escribes: git commit -m "Describe qué hiciste"
-         ↓
-4. ¡Listo! Tu cambio está guardado
+```bash
+git commit -m "Agrega validacion del formulario"
 ```
 
-## Trabajar con GitHub (la nube)
+Consultar el historial resumido:
 
-### Subir tu código a GitHub
+```bash
+git log --oneline
 ```
+
+Consultar el commit mas reciente con sus cambios:
+
+```bash
+git show
+```
+
+## 7. Trabajar con ramas
+
+Ver las ramas locales:
+
+```bash
+git branch
+```
+
+Crear y cambiarse a una rama nueva:
+
+```bash
+git switch -c nombre-de-la-rama
+```
+
+Cambiarse a una rama existente:
+
+```bash
+git switch main
+```
+
+Unir una rama en la rama actual:
+
+```bash
+git merge nombre-de-la-rama
+```
+
+Una convencion sencilla es usar ramas descriptivas, por ejemplo:
+
+```text
+feature/login
+fix/error-formulario
+docs/guia-git
+```
+
+## 8. Conectar con GitHub y sincronizar
+
+Agregar el repositorio remoto con el nombre habitual `origin`:
+
+```bash
+git remote add origin https://github.com/usuario/proyecto.git
+```
+
+Ver los remotos configurados:
+
+```bash
+git remote -v
+```
+
+Enviar la rama actual por primera vez:
+
+```bash
+git push -u origin main
+```
+
+En los siguientes envios basta con:
+
+```bash
 git push
 ```
-*Sube tus cambios a la internet*
 
-### Bajar cambios de GitHub
-```
+Descargar e integrar los cambios del remoto:
+
+```bash
 git pull
 ```
-*Descarga los cambios que hicieron otros*
 
-## Cosas útiles para recordar
+Descargar cambios sin integrarlos automaticamente:
 
-- **add** = preparar cambios
-- **commit** = guardar cambios  
-- **push** = subir a internet
-- **pull** = bajar de internet
-- **status** = ver el estado actual
-- **log** = ver el historial
-
-## Un ejemplo paso a paso (la vida real)
-
-```
-1. Abres VS Code y trabajas en tu código
-2. Terminas de programar una nueva función
-3. Abres la terminal y escribes: git status
-4. Git te dice: "Cambiaste el archivo app.js"
-5. Escribes: git add .
-6. Escribes: git commit -m "Agregué la función de login"
-7. Escribes: git push
-8. ¡Listo! Tu código está en GitHub
+```bash
+git fetch origin
 ```
 
-## ¿Cometiste un error?
+Antes de empezar a trabajar en equipo, es recomendable actualizar la rama:
 
+```bash
+git switch main
+git pull origin main
 ```
-git checkout nombre-archivo
-```
-*Vuelve el archivo a cómo estaba*
 
-```
-git reset HEAD~1
-```
-*Deshace el último commit (sin borrar los cambios)*
+## 9. Ignorar archivos
 
----
+Crea un archivo llamado `.gitignore` en la raiz del proyecto para no subir archivos generados, credenciales o configuraciones locales.
 
-**Recuerda:** Git es tu amigo. Úsalo para guardar cambios importantes frecuentemente, así nunca perderás tu trabajo.
+Ejemplo:
+
+```gitignore
+node_modules/
+.env
+*.log
+__pycache__/
+```
+
+Nunca se deben subir contrasenas, tokens ni claves privadas al repositorio.
+
+## 10. Deshacer cambios de forma segura
+
+Descartar cambios no guardados de un archivo. Esta accion elimina los cambios locales del archivo:
+
+```bash
+git restore nombre-del-archivo.txt
+```
+
+Modificar el mensaje del ultimo commit si todavia no se ha enviado:
+
+```bash
+git commit --amend -m "Nuevo mensaje del commit"
+```
+
+Crear un nuevo commit que deshace otro commit, opcion recomendada cuando el commit ya fue publicado:
+
+```bash
+git revert ID_DEL_COMMIT
+```
+
+Evita usar `git reset --hard` si no tienes claro que cambios se perderan.
+
+## 11. Flujo completo de ejemplo
+
+```bash
+# 1. Obtener la version mas reciente
+git pull origin main
+
+# 2. Crear una rama para el cambio
+git switch -c feature/saludo
+
+# 3. Editar archivos y revisar los cambios
+git status
+git diff
+
+# 4. Preparar y guardar el cambio
+git add .
+git commit -m "Agrega saludo inicial"
+
+# 5. Publicar la rama
+git push -u origin feature/saludo
+```
+
+> En el ejemplo anterior, los comandos deben escribirse sin los comentarios. La rama correcta es `feature/saludo`.
+
+## 12. Recomendaciones
+
+- Ejecuta `git status` con frecuencia.
+- Haz commits pequenos, relacionados y faciles de explicar.
+- Escribe mensajes en modo imperativo: `Agrega`, `Corrige`, `Actualiza`.
+- Actualiza tu rama antes de comenzar una tarea.
+- Revisa los archivos preparados con `git diff --staged` antes del commit.
+- No uses `git add .` sin revisar si existen archivos sensibles o innecesarios.

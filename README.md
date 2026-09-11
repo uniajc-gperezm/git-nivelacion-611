@@ -1,9 +1,10 @@
 # Practica Nivelacion GIT 611
 
-Integrantes:
+Integrates:
 
 - Docente:
-  - Gabril perez
+    - Gabriel Perez
 
-  - Estudiantes
-    - Julian Velasquez
+- Estudiantes:
+    - Pepito Perez.....
+    - Samir Rosero    

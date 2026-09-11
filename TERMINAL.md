@@ -1,247 +1,402 @@
-# TERMINAL - La guía fácil para bachilleres 🖥️
+# La terminal: navegación y superpoderes básicos
 
-## ¿Qué es la Terminal?
+La terminal es una aplicación que permite comunicarse con el sistema operativo escribiendo comandos. En lugar de buscar opciones con el mouse, se escribe una instrucción y el sistema muestra un resultado o ejecuta una acción.
 
-La terminal (o línea de comandos) es como una **forma de hablar con tu computadora escribiendo órdenes**. En lugar de hacer clic en botones, escribes lo que quieres que haga.
+Esta guía usa comandos de **Bash**, disponibles en Linux, macOS y Git Bash para Windows. Algunos comandos equivalentes de PowerShell aparecen en la sección de Windows.
 
-Piensa en ella como un **teléfono donde le das instrucciones a la computadora**.
+## 1. Cómo funciona la terminal
 
-## ¿Para qué sirve?
+Una línea de terminal suele tener esta forma:
 
-- Navegar por carpetas
-- Crear y borrar archivos
-- Ejecutar programas
-- Instalar librerías
-- Ver información de archivos
-- Trabajar con Git
-
-## ¿Cómo abro la terminal?
-
-### En Windows
-1. Abre VS Code
-2. Ve a **Terminal** → **New Terminal** (arriba del editor)
-3. O presiona **Ctrl + Ñ**
-
-### En Mac
-1. Presiona **Command + Espacio**
-2. Escribe "Terminal"
-3. Presiona Enter
-
-## Los comandos básicos (sin complicarte)
-
-### 1. Ver dónde estoy
+```text
+usuario@equipo:~/proyecto$ comando opcion argumento
 ```
+
+- `usuario`: cuenta que está utilizando la terminal.
+- `~/proyecto`: carpeta actual.
+- `$`: indica que la terminal está lista para recibir un comando.
+- `comando`: programa que se desea ejecutar.
+- `opcion`: modifica el comportamiento del comando.
+- `argumento`: archivo, carpeta o valor sobre el que trabaja el comando.
+
+Ejemplo:
+
+```bash
+ls -la documentos
+```
+
+Aquí `ls` es el comando, `-la` son opciones y `documentos` es el argumento.
+
+La terminal distingue entre mayúsculas y minúsculas: `Proyecto`, `proyecto` y `PROYECTO` pueden ser nombres diferentes.
+
+## 2. Ayuda y comandos básicos
+
+Antes de memorizar un comando, se puede consultar su ayuda:
+
+```bash
+comando --help
+man comando
+```
+
+Por ejemplo:
+
+```bash
+git --help
+ls --help
+```
+
+Comandos de información rápida:
+
+```bash
+pwd                 # Mostrar la carpeta actual
+whoami              # Mostrar el usuario actual
+date                # Mostrar fecha y hora
+clear               # Limpiar la pantalla
+history             # Mostrar comandos anteriores
+```
+
+También se puede usar la tecla `Flecha arriba` para recuperar comandos anteriores y `Tab` para autocompletar nombres de archivos o comandos.
+
+## 3. Moverse por carpetas
+
+### Mostrar la carpeta actual
+
+```bash
 pwd
 ```
-*Te muestra la ruta donde estás ahora*
 
-### 2. Ver qué hay en esta carpeta
-```
-ls
-```
-*(En Windows: dir)*
-*Te lista los archivos y carpetas*
+`pwd` significa *print working directory*.
 
-### 3. Entrar en una carpeta
-```
-cd nombre-carpeta
-```
-*cd = "change directory" (cambiar carpeta)*
+### Listar archivos y carpetas
 
-**Ejemplo:**
-```
-cd Documentos
+```bash
+ls                  # Lista básica
+ls -l               # Lista detallada
+ls -la              # Incluye archivos ocultos
+ls -lah             # Incluye tamaños fáciles de leer
 ```
 
-### 4. Volver a la carpeta anterior
-```
-cd ..
-```
-*Los dos puntos significan "carpeta padre"*
+### Cambiar de carpeta
 
-### 5. Ir a la carpeta del usuario
-```
-cd ~
-```
-*La raya (~) significa tu carpeta de usuario*
-
-### 6. Crear una carpeta
-```
-mkdir nombre-carpeta
-```
-*mkdir = "make directory"*
-
-**Ejemplo:**
-```
-mkdir mi-proyecto
+```bash
+cd nombre-carpeta    # Entrar en una carpeta
+cd ..                # Subir un nivel
+cd ~                 # Ir a la carpeta personal
+cd -                 # Volver a la carpeta anterior
+cd /                 # Ir a la raíz del sistema
 ```
 
-### 7. Crear un archivo
-```
-touch nombre-archivo.txt
-```
-*Crea un archivo vacío*
+Una ruta puede ser **relativa** a la carpeta actual:
 
-### 8. Ver el contenido de un archivo
-```
-cat nombre-archivo.txt
-```
-*Te muestra lo que hay dentro*
-
-### 9. Copiar un archivo
-```
-cp archivo-original.txt copia-archivo.txt
+```bash
+cd src/componentes
 ```
 
-### 10. Mover o renombrar un archivo
-```
-mv nombre-viejo.txt nombre-nuevo.txt
-```
+O **absoluta**, comenzando desde la raíz:
 
-### 11. Borrar un archivo
-```
-rm nombre-archivo.txt
-```
-*¡Cuidado! Se borra para siempre*
-
-### 12. Borrar una carpeta vacía
-```
-rmdir nombre-carpeta
+```bash
+cd /home/estudiante/proyecto
 ```
 
-### 13. Borrar una carpeta con contenido
-```
-rm -r nombre-carpeta
-```
-*-r significa "recursivo" (borra todo adentro)*
-*¡CUIDADO! Se borra TODO para siempre*
+Los espacios en nombres de archivos deben protegerse con comillas o con `\\`:
 
-### 14. Limpiar la pantalla
-```
-clear
-```
-*O en Windows: cls*
-
-## Ejemplo de una sesión normal
-
-```
-$ pwd
-/Users/julian/Documents
-
-$ ls
-proyecto1  proyecto2  README.md
-
-$ cd proyecto1
-$ pwd
-/Users/julian/Documents/proyecto1
-
-$ ls
-index.html  style.css  script.js
-
-$ cat index.html
-<!DOCTYPE html>
-<html>
-...
-
-$ cd ..
-$ pwd
-/Users/julian/Documents
+```bash
+cd "Mi Proyecto"
+cd Mi\\ Proyecto
 ```
 
-## Características útiles
+## 4. Crear, copiar, mover y eliminar
 
-### El símbolo $
-```
-$ tu-comando
-```
-El $ es solo el símbolo de la terminal, **no lo escribes**, ya está ahí.
+Crear carpetas y archivos vacíos:
 
-### Autocompletado
-Escribe las primeras letras y presiona **Tab** para autocompletar.
-
-**Ejemplo:**
-```
-cd Docu[TAB] → cd Documentos
+```bash
+mkdir proyecto
+mkdir -p proyecto/src/componentes
+touch README.md
 ```
 
-### Histórico de comandos
-Presiona **Flecha Arriba** para ver comandos anteriores.
+Copiar archivos o carpetas:
 
-### Ejecutar comandos anteriores
-Puedes reutilizar comandos con las flechas del teclado.
-
-## Combinaciones útiles
-
-### Ejecutar dos comandos seguidos
-```
-comando1 && comando2
-```
-*El segundo solo se ejecuta si el primero funcionó*
-
-**Ejemplo:**
-```
-cd mi-proyecto && ls
+```bash
+cp origen.txt copia.txt
+cp -r carpeta-original carpeta-copia
 ```
 
-### Ver más información de un comando
-```
-comando --help
-```
-*Te muestra la ayuda del comando*
+Mover o cambiar el nombre:
 
-## Comandos especiales para programadores
-
-### Instalar programas (Node.js, Python, etc)
-```
-npm install nombre-paquete
+```bash
+mv archivo.txt documentos/
+mv viejo-nombre.txt nuevo-nombre.txt
 ```
 
-### Ejecutar un programa
-```
-node archivo.js
-```
+Eliminar archivos o carpetas:
 
-### Ejecutar Python
-```
-python archivo.py
+```bash
+rm archivo-temporal.txt
+rm -r carpeta
 ```
 
-## El orden de la terminal (cheat sheet)
+`rm` elimina directamente y normalmente no envía los archivos a una papelera. Antes de usar `rm -r`, confirmar la ruta con `pwd` y `ls`. No ejecutar comandos destructivos que no se entiendan, especialmente:
 
-```
-pwd          → ¿Dónde estoy?
-ls / dir     → ¿Qué hay aquí?
-cd carpeta   → Entrar en carpeta
-cd ..        → Salir de carpeta
-mkdir        → Crear carpeta
-touch        → Crear archivo
-cat          → Ver contenido
-cp           → Copiar
-mv           → Mover/Renombrar
-rm           → Borrar archivo
-rm -r        → Borrar carpeta
-clear / cls  → Limpiar pantalla
+```bash
+rm -rf /
+rm -rf *
 ```
 
-## Consejos prácticos
+## 5. Leer y editar archivos desde la terminal
 
-1. **Usa Tab para autocompletar** - Ahorra tiempo y evita errores
-2. **Usa las flechas** - Para revisar comandos anteriores
-3. **Ten cuidado con rm** - No hay papelera de reciclaje
-4. **Usa ls antes de cd** - Para ver qué carpetas hay
-5. **Si te pierdes, usa cd ~** - Vuelve a casa
+```bash
+cat README.md       # Mostrar el archivo completo
+less README.md      # Leer página por página
+head -n 10 archivo  # Mostrar las primeras 10 líneas
+tail -n 10 archivo  # Mostrar las últimas 10 líneas
+tail -f registro.log # Seguir un archivo que está creciendo
+```
 
-## Mensajes comunes que verás
+En `less` se puede usar `Espacio` para avanzar, `b` para retroceder y `q` para salir.
 
-| Mensaje | Qué significa |
-|---------|---------------|
-| `No such file or directory` | El archivo/carpeta no existe |
-| `Permission denied` | No tienes permiso |
-| `command not found` | La orden no existe o no está instalada |
-| `already exists` | El archivo/carpeta ya existe |
+Para editar un archivo se puede usar el editor configurado en el equipo:
 
----
+```bash
+code README.md
+```
 
-**¡Listo!** Con estos comandos básicos ya puedes hacer la mayoría de cosas en la terminal. 
+En Git Bash, el comando `code` funciona cuando Visual Studio Code fue agregado al `PATH`.
 
-**Recuerda:** Si algo sale mal, simplemente cierra la terminal y abre otra. ¡No te asustes!
+## 6. Rutas, comodines y archivos ocultos
+
+Los comodines permiten seleccionar varios nombres:
+
+```bash
+ls *.js       # Archivos que terminan en .js
+ls src/*.py   # Archivos Python directamente dentro de src
+ls archivo?.txt # Un solo carácter variable
+```
+
+Algunos archivos de configuración comienzan con punto y son ocultos:
+
+```bash
+ls -la
+```
+
+` .gitignore` y ` .env` son ejemplos comunes. No publiques archivos `.env` si contienen secretos.
+
+## 7. Buscar archivos y texto
+
+### Buscar archivos con `find`
+
+```bash
+find . -name "*.py"
+find . -type f -name "README.md"
+find . -type d -name "tests"
+```
+
+El punto (`.`) significa “desde la carpeta actual”.
+
+### Buscar texto con `grep`
+
+```bash
+grep "TODO" archivo.js
+grep -R "nombreFuncion" src/
+grep -Rni "error" .
+```
+
+- `-R`: busca dentro de subcarpetas.
+- `-n`: muestra el número de línea.
+- `-i`: ignora mayúsculas y minúsculas.
+
+En proyectos grandes, `rg` (*ripgrep*) suele ser más rápido:
+
+```bash
+rg "TODO|FIXME" src/
+rg --files -g "*.js"
+```
+
+## 8. El superpoder principal: combinar comandos
+
+La terminal permite conectar la salida de un comando con la entrada de otro usando una tubería (`|`):
+
+```bash
+ls -la | less
+```
+
+Ejemplos prácticos:
+
+```bash
+find . -type f | wc -l
+git log --oneline | head -n 10
+grep -Rni "TODO" src/ | less
+history | tail -n 20
+```
+
+La idea general es:
+
+```text
+comando-que-produce-datos | comando-que-filtra-o-transforma
+```
+
+Otros comandos útiles para transformar resultados:
+
+```bash
+sort archivo.txt       # Ordenar líneas
+uniq archivo.txt       # Eliminar repeticiones consecutivas
+wc -l archivo.txt      # Contar líneas
+cut -d, -f1 datos.csv  # Extraer una columna separada por comas
+```
+
+Ejemplo: contar las extensiones de archivos JavaScript encontrados:
+
+```bash
+find . -type f -name "*.js" | wc -l
+```
+
+## 9. Guardar y reutilizar resultados
+
+La redirección `>` guarda la salida en un archivo y reemplaza su contenido:
+
+```bash
+ls -la > listado.txt
+```
+
+La redirección `>>` agrega información al final:
+
+```bash
+date >> actividad.log
+```
+
+Para mostrar la salida en pantalla y guardarla al mismo tiempo:
+
+```bash
+git status | tee estado.txt
+```
+
+La entrada estándar puede venir de un archivo usando `<`:
+
+```bash
+sort < nombres.txt
+```
+
+Hay que tener cuidado con `>` porque sobrescribe el archivo sin pedir confirmación en muchos entornos.
+
+## 10. Variables y comandos encadenados
+
+Una variable guarda un valor temporal:
+
+```bash
+NOMBRE="Ana"
+echo "Hola, $NOMBRE"
+```
+
+Una variable útil es `$PATH`, que contiene las carpetas donde la terminal busca comandos:
+
+```bash
+echo "$PATH"
+```
+
+Los comandos pueden ejecutarse en secuencia:
+
+```bash
+mkdir practica && cd practica
+```
+
+`&&` ejecuta el segundo comando solo si el primero funciona. Esto es más seguro que continuar automáticamente después de un error.
+
+También se puede ejecutar una instrucción y luego otra aunque la primera falle usando `;`:
+
+```bash
+echo "Inicio"; echo "Fin"
+```
+
+Para ejecutar una tarea en segundo plano se agrega `&`:
+
+```bash
+code . &
+```
+
+## 11. Procesos y programas
+
+Consultar procesos activos:
+
+```bash
+ps
+ps aux
+```
+
+Detener un comando que está ejecutándose:
+
+```text
+Ctrl + C
+```
+
+Pausar temporalmente un proceso:
+
+```text
+Ctrl + Z
+```
+
+Ver trabajos pausados o en segundo plano:
+
+```bash
+jobs
+```
+
+No es recomendable terminar procesos del sistema sin identificar primero su propósito.
+
+## 12. Comandos útiles para proyectos
+
+Desde la carpeta de un proyecto:
+
+```bash
+code .                 # Abrir la carpeta en Visual Studio Code
+git status              # Consultar el estado de Git
+git log --oneline       # Ver el historial resumido
+npm install             # Instalar dependencias de un proyecto Node.js
+npm test                # Ejecutar pruebas, si están configuradas
+python main.py          # Ejecutar un programa Python
+```
+
+Antes de ejecutar un comando del proyecto, revisar su `README.md`, `package.json`, `requirements.txt` o archivo equivalente.
+
+## 13. Equivalencias comunes en Windows PowerShell
+
+Si no se usa Git Bash sino PowerShell, estos comandos son equivalentes o similares:
+
+| Acción | Bash / Git Bash | PowerShell |
+| --- | --- | --- |
+| Carpeta actual | `pwd` | `Get-Location` |
+| Listar archivos | `ls` | `Get-ChildItem` |
+| Cambiar carpeta | `cd carpeta` | `Set-Location carpeta` |
+| Copiar | `cp origen destino` | `Copy-Item origen destino` |
+| Mover | `mv origen destino` | `Move-Item origen destino` |
+| Eliminar | `rm archivo` | `Remove-Item archivo` |
+| Buscar texto | `grep texto archivo` | `Select-String texto archivo` |
+| Limpiar pantalla | `clear` | `Clear-Host` |
+
+PowerShell también acepta alias como `ls`, `cd`, `cp`, `mv` y `rm`, pero sus opciones no siempre son iguales a las de Bash.
+
+## 14. Flujo de práctica recomendado
+
+```bash
+mkdir practica-terminal
+cd practica-terminal
+mkdir src docs
+touch src/app.js docs/notas.md
+printf "console.log('Hola');\n" > src/app.js
+find . -type f | sort
+grep -Rni "console" .
+cat src/app.js
+```
+
+Este ejercicio crea un proyecto pequeño, escribe código, busca archivos, encuentra texto y muestra el resultado sin abrir un explorador de archivos.
+
+## 15. Reglas de seguridad
+
+- Confirmar siempre la carpeta actual con `pwd` antes de mover o eliminar archivos.
+- Inspeccionar una ruta con `ls` antes de usar `rm`, `mv` o `cp`.
+- Evitar ejecutar comandos copiados de Internet sin entenderlos.
+- No pegar contraseñas, tokens ni claves privadas en la terminal o en archivos del repositorio.
+- No usar `sudo` o permisos de administrador salvo que sea necesario y se conozca el efecto.
+- Recordar que `>` puede sobrescribir archivos y `rm` puede eliminarlos permanentemente.
+- Usar `Ctrl + C` para detener un comando que parece quedarse ejecutándose.
+
+La terminal se vuelve poderosa cuando se combinan comandos pequeños y verificables. La mejor práctica es avanzar paso a paso, revisar la salida y automatizar únicamente después de entender cada instrucción.
