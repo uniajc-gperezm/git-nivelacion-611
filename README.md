@@ -7,5 +7,6 @@ Integrates:
 
 - Estudiantes:
     - Pepito Perez.....
-    - Samir Rosero
-    - Sebastián Abadía
+    - Samir Rosero    
+    - karen viviana
+    - Sebastian Abadia
