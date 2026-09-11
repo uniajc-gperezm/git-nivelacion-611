@@ -7,4 +7,5 @@ Integrates:
 
 - Estudiantes:
     - Pepito Perez.....
-    - Samir Rosero    
+    - Samir Rosero 
+    - Lorena  Ramirez
