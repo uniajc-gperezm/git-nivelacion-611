@@ -6,4 +6,4 @@ Integrates:
     - Gabriel Perez
 
 - Estudiantes:
-    - Pepito Perez.....
+    - Jefersson Beltran
