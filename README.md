@@ -3,8 +3,9 @@
 Integrates:
 
 - Docente:
-    - Gabriel Perez
+  - Gabriel Perez
 
 - Estudiantes:
-    - Pepito Perez.....
-    - Samir Rosero    
+  - Pepito Perez.....
+  - Samir Rosero
+  - Juan Tello
