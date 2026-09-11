@@ -3,10 +3,11 @@
 Integrates:
 
 - Docente:
-    - Gabriel Perez
+  - Gabriel Perez
 
 - Estudiantes:
-    - Pepito Perez.....
-    - Samir Rosero
-    - Thomas Lopez Leon
-    - karen viviana 
+  - Pepito Perez.....
+  - Samir Rosero
+  - Thomas Lopez Leon
+  - karen viviana
+  - Juan Tello
