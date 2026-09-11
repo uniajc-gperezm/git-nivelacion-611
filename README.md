@@ -10,3 +10,4 @@ Integrates:
     - Samir Rosero
     - Thomas Lopez Leon
     - karen viviana 
+    - william jesus
