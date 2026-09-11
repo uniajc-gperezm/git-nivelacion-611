@@ -8,3 +8,5 @@ Integrates:
 - Estudiantes:
     - Pepito Perez.....
     - Samir Rosero    
+
+    - Juan Trochez 
