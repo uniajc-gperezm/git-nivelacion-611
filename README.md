@@ -9,4 +9,5 @@ Integrates:
     - Pepito Perez.....
     - Samir Rosero
     - Thomas Lopez Leon
-    - karen viviana 
+    - karen viviana
+    -Giuliano jaramillo
